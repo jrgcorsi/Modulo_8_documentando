@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>modulos module &mdash; restorante 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="vista module" href="vista.html" />
+    <link rel="prev" title="controlador module" href="controlador.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> restorante
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="controlador.html">controlador module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">modulos module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#modulos.BaseModel"><code class="docutils literal notranslate"><span class="pre">BaseModel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modulos.BaseModel.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">BaseModel.DoesNotExist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modulos.BaseModel.id"><code class="docutils literal notranslate"><span class="pre">BaseModel.id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#modulos.MiModelo"><code class="docutils literal notranslate"><span class="pre">MiModelo</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modulos.MiModelo.borrar"><code class="docutils literal notranslate"><span class="pre">MiModelo.borrar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modulos.MiModelo.consulta"><code class="docutils literal notranslate"><span class="pre">MiModelo.consulta()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modulos.MiModelo.funcion_g"><code class="docutils literal notranslate"><span class="pre">MiModelo.funcion_g()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modulos.MiModelo.imprimir"><code class="docutils literal notranslate"><span class="pre">MiModelo.imprimir()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modulos.MiModelo.modificar"><code class="docutils literal notranslate"><span class="pre">MiModelo.modificar()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#modulos.RegistroError"><code class="docutils literal notranslate"><span class="pre">RegistroError</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modulos.RegistroError.BASE_DIR"><code class="docutils literal notranslate"><span class="pre">RegistroError.BASE_DIR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modulos.RegistroError.registrar_err"><code class="docutils literal notranslate"><span class="pre">RegistroError.registrar_err()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modulos.RegistroError.ruta"><code class="docutils literal notranslate"><span class="pre">RegistroError.ruta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#modulos.db"><code class="docutils literal notranslate"><span class="pre">db</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modulos.err_alta"><code class="docutils literal notranslate"><span class="pre">err_alta()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modulos.err_modificar"><code class="docutils literal notranslate"><span class="pre">err_modificar()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modulos.pedidos"><code class="docutils literal notranslate"><span class="pre">pedidos</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modulos.pedidos.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">pedidos.DoesNotExist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modulos.pedidos.cantidad"><code class="docutils literal notranslate"><span class="pre">pedidos.cantidad</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modulos.pedidos.id"><code class="docutils literal notranslate"><span class="pre">pedidos.id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modulos.pedidos.menu"><code class="docutils literal notranslate"><span class="pre">pedidos.menu</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modulos.pedidos.mesa"><code class="docutils literal notranslate"><span class="pre">pedidos.mesa</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modulos.pedidos.paso"><code class="docutils literal notranslate"><span class="pre">pedidos.paso</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vista.html">vista module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">restorante</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">modulos module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/modulos.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-modulos">
+<span id="modulos-module"></span><h1>modulos module<a class="headerlink" href="#module-modulos" title="Permalink to this heading"></a></h1>
+<dl class="simple">
+<dt>modulos.py</dt><dd><p>creamos el modulo que ejecutara nuestra vista</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="modulos.BaseModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modulos.</span></span><span class="sig-name descname"><span class="pre">BaseModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modulos.html#BaseModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modulos.BaseModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modulos.BaseModel.DoesNotExist">
+<span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#modulos.BaseModel.DoesNotExist" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModelDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modulos.BaseModel.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;AutoField:</span> <span class="pre">BaseModel.id&gt;</span></em><a class="headerlink" href="#modulos.BaseModel.id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modulos.MiModelo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modulos.</span></span><span class="sig-name descname"><span class="pre">MiModelo</span></span><a class="reference internal" href="_modules/modulos.html#MiModelo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modulos.MiModelo" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>creamos la clase que tendra nuestras acciones dentro del modelo</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modulos.MiModelo.borrar">
+<span class="sig-name descname"><span class="pre">borrar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_mesa</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_paso</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_menu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_cantidad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesa_com</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paso_com</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry_menu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry_cantidad</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modulos.html#MiModelo.borrar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modulos.MiModelo.borrar" title="Permalink to this definition"></a></dt>
+<dd><p>validamos que no haya campos vacios</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modulos.MiModelo.consulta">
+<span class="sig-name descname"><span class="pre">consulta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesa_com</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paso_com</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry_menu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry_cantidad</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modulos.html#MiModelo.consulta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modulos.MiModelo.consulta" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modulos.MiModelo.funcion_g">
+<span class="sig-name descname"><span class="pre">funcion_g</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_mesa</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_paso</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_menu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_cantidad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesa_com</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paso_com</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry_menu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry_cantidad</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modulos.html#MiModelo.funcion_g"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modulos.MiModelo.funcion_g" title="Permalink to this definition"></a></dt>
+<dd><p>declaramos todas las variables necesarias desde la vista</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modulos.MiModelo.imprimir">
+<span class="sig-name descname"><span class="pre">imprimir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_mesa</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_paso</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_menu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_cantidad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modulos.html#MiModelo.imprimir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modulos.MiModelo.imprimir" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modulos.MiModelo.modificar">
+<span class="sig-name descname"><span class="pre">modificar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_menu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_cantidad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_mesa</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_paso</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesa_com</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paso_com</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry_menu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry_cantidad</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modulos.html#MiModelo.modificar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modulos.MiModelo.modificar" title="Permalink to this definition"></a></dt>
+<dd><p>creamos dos variables que se utilizaran para comparar el patron cargado en el valor ingresado.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="modulos.RegistroError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modulos.</span></span><span class="sig-name descname"><span class="pre">RegistroError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">archivo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fecha</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modulos.html#RegistroError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modulos.RegistroError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modulos.RegistroError.BASE_DIR">
+<span class="sig-name descname"><span class="pre">BASE_DIR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'C:\\Users\\Jorge\\Desktop\\Diplomatura</span> <span class="pre">en</span> <span class="pre">Python\\Nivel</span> <span class="pre">Intermedio\\Unidad</span> <span class="pre">2\\Modulo_8_documentando\\doc_sphinx\\Proyecto'</span></em><a class="headerlink" href="#modulos.RegistroError.BASE_DIR" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modulos.RegistroError.registrar_err">
+<span class="sig-name descname"><span class="pre">registrar_err</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modulos.html#RegistroError.registrar_err"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modulos.RegistroError.registrar_err" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modulos.RegistroError.ruta">
+<span class="sig-name descname"><span class="pre">ruta</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'C:\\Users\\Jorge\\Desktop\\Diplomatura</span> <span class="pre">en</span> <span class="pre">Python\\Nivel</span> <span class="pre">Intermedio\\Unidad</span> <span class="pre">2\\Modulo_8_documentando\\doc_sphinx\\Proyecto\\log.txt'</span></em><a class="headerlink" href="#modulos.RegistroError.ruta" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="modulos.db">
+<span class="sig-prename descclassname"><span class="pre">modulos.</span></span><span class="sig-name descname"><span class="pre">db</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;peewee.SqliteDatabase</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#modulos.db" title="Permalink to this definition"></a></dt>
+<dd><p>Creamos la clase del modelo de nuestra BASE</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modulos.err_alta">
+<span class="sig-prename descclassname"><span class="pre">modulos.</span></span><span class="sig-name descname"><span class="pre">err_alta</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modulos.html#err_alta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modulos.err_alta" title="Permalink to this definition"></a></dt>
+<dd><p>creamos una funcion para registrar el error cuando este se da en la funcion guardar</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modulos.err_modificar">
+<span class="sig-prename descclassname"><span class="pre">modulos.</span></span><span class="sig-name descname"><span class="pre">err_modificar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modulos.html#err_modificar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modulos.err_modificar" title="Permalink to this definition"></a></dt>
+<dd><p>creamos una funcion para registrar el error cuando este se da en la funcion modificar</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modulos.pedidos">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modulos.</span></span><span class="sig-name descname"><span class="pre">pedidos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modulos.html#pedidos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modulos.pedidos" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modulos.BaseModel" title="modulos.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mesa</strong> – corresponde a la mesa donde se toma el pedido</p></li>
+<li><p><strong>paso</strong> – corresponde al tipo de menu que el cliente solicitara</p></li>
+<li><p><strong>menu</strong> – es lo que nuestro cliente solicita</p></li>
+<li><p><strong>cantidad</strong> – es la cantidad de ese menu que la mesa solicita</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modulos.pedidos.DoesNotExist">
+<span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#modulos.pedidos.DoesNotExist" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">pedidosDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modulos.pedidos.cantidad">
+<span class="sig-name descname"><span class="pre">cantidad</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">pedidos.cantidad&gt;</span></em><a class="headerlink" href="#modulos.pedidos.cantidad" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modulos.pedidos.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;AutoField:</span> <span class="pre">pedidos.id&gt;</span></em><a class="headerlink" href="#modulos.pedidos.id" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modulos.pedidos.menu">
+<span class="sig-name descname"><span class="pre">menu</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">pedidos.menu&gt;</span></em><a class="headerlink" href="#modulos.pedidos.menu" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modulos.pedidos.mesa">
+<span class="sig-name descname"><span class="pre">mesa</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">pedidos.mesa&gt;</span></em><a class="headerlink" href="#modulos.pedidos.mesa" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modulos.pedidos.paso">
+<span class="sig-name descname"><span class="pre">paso</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;CharField:</span> <span class="pre">pedidos.paso&gt;</span></em><a class="headerlink" href="#modulos.pedidos.paso" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="controlador.html" class="btn btn-neutral float-left" title="controlador module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="vista.html" class="btn btn-neutral float-right" title="vista module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jorge.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

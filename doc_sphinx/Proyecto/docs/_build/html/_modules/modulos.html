@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>modulos &mdash; restorante 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> restorante
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../controlador.html">controlador module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modulos.html">modulos module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vista.html">vista module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">restorante</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">modulos</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for modulos</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">modulos.py</span>
+<span class="sd">    creamos el modulo que ejecutara nuestra vista</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">import</span> <span class="nn">win32api</span>
+<span class="kn">import</span> <span class="nn">win32print</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">messagebox</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">system</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">peewee</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Definimos el nombre de nuestra variable que determinara que tipo de base de datows utilizaremos.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">SqliteDatabase</span><span class="p">(</span><span class="s2">&quot;comidas.db&quot;</span><span class="p">)</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Creamos la clase del modelo de nuestra BASE</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="BaseModel"><a class="viewcode-back" href="../modulos.html#modulos.BaseModel">[docs]</a><span class="k">class</span> <span class="nc">BaseModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">database</span> <span class="o">=</span> <span class="n">db</span></div>
+
+<span class="c1"># Esta clase esta destinada a los titulos de la tabla</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">en nuestra tabla, defimos que campos tendremos y que formato tendra cada uno de ellos.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="pedidos"><a class="viewcode-back" href="../modulos.html#modulos.pedidos">[docs]</a><span class="k">class</span> <span class="nc">pedidos</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param mesa: corresponde a la mesa donde se toma el pedido</span>
+<span class="sd">    :param paso: corresponde al tipo de menu que el cliente solicitara</span>
+<span class="sd">    :param menu: es lo que nuestro cliente solicita</span>
+<span class="sd">    :param cantidad: es la cantidad de ese menu que la mesa solicita</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mesa</span> <span class="o">=</span> <span class="n">IntegerField</span><span class="p">(</span><span class="n">unique</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">paso</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">()</span>
+    <span class="n">menu</span> <span class="o">=</span> <span class="n">CharField</span><span class="p">()</span>
+    <span class="n">cantidad</span> <span class="o">=</span> <span class="n">IntegerField</span><span class="p">()</span></div>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">al iniciar el modelo, conectamos la base de datos.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">El siguiente comando crea la tabla que utilizaremos.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># Creamos la table de la base de datos</span>
+<span class="n">db</span><span class="o">.</span><span class="n">create_tables</span><span class="p">([</span><span class="n">pedidos</span><span class="p">])</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">creamos un registro de errores.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="RegistroError"><a class="viewcode-back" href="../modulos.html#modulos.RegistroError">[docs]</a><span class="k">class</span> <span class="nc">RegistroError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+
+    <span class="n">BASE_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">((</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)))</span>
+    <span class="n">ruta</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s2">&quot;log.txt&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accion</span><span class="p">,</span> <span class="n">archivo</span><span class="p">,</span> <span class="n">fecha</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        en el constructor, definimos las variables que vamos a incluir en nuestro log.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">accion</span> <span class="o">=</span> <span class="n">accion</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">archivo</span> <span class="o">=</span> <span class="n">archivo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fecha</span> <span class="o">=</span> <span class="n">fecha</span>
+
+<div class="viewcode-block" id="RegistroError.registrar_err"><a class="viewcode-back" href="../modulos.html#modulos.RegistroError.registrar_err">[docs]</a>    <span class="k">def</span> <span class="nf">registrar_err</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">log</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ruta</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;se ha dado un error en la accion:&quot;</span><span class="p">,</span>
+              <span class="bp">self</span><span class="o">.</span><span class="n">archivo</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">accion</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fecha</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">log</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="err_alta"><a class="viewcode-back" href="../modulos.html#modulos.err_alta">[docs]</a><span class="k">def</span> <span class="nf">err_alta</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    creamos una funcion para registrar el error cuando este se da en la funcion guardar</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">raise</span> <span class="n">RegistroError</span><span class="p">(</span><span class="s2">&quot;crear&quot;</span><span class="p">,</span> <span class="s2">&quot;funcion_g&quot;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="err_modificar"><a class="viewcode-back" href="../modulos.html#modulos.err_modificar">[docs]</a><span class="k">def</span> <span class="nf">err_modificar</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    creamos una funcion para registrar el error cuando este se da en la funcion modificar</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">raise</span> <span class="n">RegistroError</span><span class="p">(</span><span class="s2">&quot;modificar&quot;</span><span class="p">,</span> <span class="s2">&quot;modificar&quot;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="MiModelo"><a class="viewcode-back" href="../modulos.html#modulos.MiModelo">[docs]</a><span class="k">class</span> <span class="nc">MiModelo</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    creamos la clase que tendra nuestras acciones dentro del modelo</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span> <span class="k">pass</span>  <span class="c1"># constructor</span>
+
+    <span class="c1"># Alta de registro</span>
+<div class="viewcode-block" id="MiModelo.funcion_g"><a class="viewcode-back" href="../modulos.html#modulos.MiModelo.funcion_g">[docs]</a>    <span class="k">def</span> <span class="nf">funcion_g</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_mesa</span><span class="p">,</span> <span class="n">var_paso</span><span class="p">,</span> <span class="n">var_menu</span><span class="p">,</span> <span class="n">var_cantidad</span><span class="p">,</span> <span class="n">tree</span><span class="p">,</span> <span class="n">mesa_com</span><span class="p">,</span> <span class="n">paso_com</span><span class="p">,</span> <span class="n">entry_menu</span><span class="p">,</span> <span class="n">entry_cantidad</span><span class="p">):</span>  <span class="c1"># OK</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        declaramos todas las variables necesarias desde la vista</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">cad_menu</span> <span class="o">=</span> <span class="n">var_menu</span>
+        <span class="n">cad_cantidad</span> <span class="o">=</span> <span class="n">var_cantidad</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        creamos 2 variables que obtendran los datos para validarlos contra el patron</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># patron de validacion</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        definimos el patron, este validara que sean datos alfanumericos los permitidos</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">patron</span> <span class="o">=</span> <span class="s2">&quot;^[a-zA-Z0-9\s]+&quot;</span> <span class="s2">&quot;+[a-zA-Z0-9]*$&quot;</span>
+        <span class="n">patron_cantidad</span> <span class="o">=</span> <span class="s2">&quot;[0-9]&quot;</span>
+
+        <span class="n">assert_mesa</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">var_mesa</span><span class="p">)</span>
+
+        <span class="c1"># Usando el assert como excepcion</span>
+        <span class="k">assert</span> <span class="n">assert_mesa</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;Debe ingresar una mesa valida&quot;</span>
+
+        <span class="c1"># Usando try para evaluar una condicion</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">var_paso</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pass&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                <span class="n">message</span><span class="o">=</span><span class="s2">&quot;No puede crear un pedido sin PASO&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;PASO incorrecto&quot;</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">err_alta</span><span class="p">()</span>
+            <span class="k">except</span> <span class="n">RegistroError</span> <span class="k">as</span> <span class="n">log</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">registrar_err</span><span class="p">()</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">patron</span><span class="p">,</span> <span class="n">cad_menu</span><span class="p">)</span> <span class="ow">and</span>
+                    <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">patron_cantidad</span><span class="p">,</span> <span class="n">cad_cantidad</span><span class="p">)):</span>
+                <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                    <span class="n">message</span><span class="o">=</span><span class="s2">&quot;El codigo fue creado correctamente&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Nuevo Codigo&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Nueva alta con peewee</span>
+                <span class="n">pedido</span> <span class="o">=</span> <span class="n">pedidos</span><span class="p">()</span>
+                <span class="n">pedido</span><span class="o">.</span><span class="n">mesa</span> <span class="o">=</span> <span class="n">var_mesa</span>
+                <span class="n">pedido</span><span class="o">.</span><span class="n">paso</span> <span class="o">=</span> <span class="n">var_paso</span>
+                <span class="n">pedido</span><span class="o">.</span><span class="n">menu</span> <span class="o">=</span> <span class="n">var_menu</span>
+                <span class="n">pedido</span><span class="o">.</span><span class="n">cantidad</span> <span class="o">=</span> <span class="n">var_cantidad</span>
+                <span class="n">pedido</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+                <span class="c1"># borra el contenido del text luego de guardar</span>
+                <span class="n">mesa_com</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">),</span>
+                <span class="n">paso_com</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">),</span>
+                <span class="n">entry_menu</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">),</span>
+                <span class="n">entry_cantidad</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span>
+                <span class="c1"># actualizo el treeview luego de guardar el elemento</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">consulta</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">mesa_com</span><span class="p">,</span> <span class="n">paso_com</span><span class="p">,</span>
+                              <span class="n">entry_menu</span><span class="p">,</span> <span class="n">entry_cantidad</span><span class="p">)</span>
+                <span class="c1"># posieciono para tomar nuevo pedido</span>
+                <span class="n">mesa_com</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                sin los datos ingresados no coinciden con el patron, ya se porque se ingreso un valor no valido o caracter no valido la aplicacion data un error.</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                    <span class="n">message</span><span class="o">=</span><span class="s2">&quot;los datos cargados son incorrectos, por favor intente nuevamente&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span>
+                <span class="c1"># validacion de patron por consolelog</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Patron no valido&quot;</span><span class="p">)</span></div>
+
+        <span class="c1"># Consultar de pedidos totales</span>
+
+<div class="viewcode-block" id="MiModelo.consulta"><a class="viewcode-back" href="../modulos.html#modulos.MiModelo.consulta">[docs]</a>    <span class="k">def</span> <span class="nf">consulta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">,</span> <span class="n">mesa_com</span><span class="p">,</span> <span class="n">paso_com</span><span class="p">,</span> <span class="n">entry_menu</span><span class="p">,</span> <span class="n">entry_cantidad</span><span class="p">):</span>  <span class="c1"># revisar posicionales</span>
+        <span class="n">system</span><span class="p">(</span><span class="s2">&quot;cls&quot;</span><span class="p">)</span>
+        <span class="n">registros</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">get_children</span><span class="p">()</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        obtenemos el grupo de valores que tiene el treeview</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">elemento</span> <span class="ow">in</span> <span class="n">registros</span><span class="p">:</span>
+            <span class="n">tree</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">elemento</span><span class="p">)</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        borramos el treeview por completo</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">fila</span> <span class="ow">in</span> <span class="n">pedidos</span><span class="o">.</span><span class="n">select</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">([</span><span class="s2">&quot;Mesa&quot;</span><span class="p">,</span> <span class="n">fila</span><span class="o">.</span><span class="n">mesa</span><span class="p">,</span> <span class="s2">&quot;Paso&quot;</span><span class="p">,</span> <span class="n">fila</span><span class="o">.</span><span class="n">paso</span><span class="p">,</span>
+                  <span class="s2">&quot;Menu&quot;</span><span class="p">,</span> <span class="n">fila</span><span class="o">.</span><span class="n">menu</span><span class="p">,</span> <span class="s2">&quot;Cantidad&quot;</span><span class="p">,</span> <span class="n">fila</span><span class="o">.</span><span class="n">cantidad</span><span class="p">])</span>
+            <span class="n">tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">fila</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">(</span>
+                <span class="n">fila</span><span class="o">.</span><span class="n">mesa</span><span class="p">,</span> <span class="n">fila</span><span class="o">.</span><span class="n">paso</span><span class="p">,</span> <span class="n">fila</span><span class="o">.</span><span class="n">menu</span><span class="p">,</span> <span class="n">fila</span><span class="o">.</span><span class="n">cantidad</span><span class="p">))</span>
+        
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        volvemos a listar e insertamos valor por valor en el treeview, para listar los productos actualizados.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># borra el contenido del text luego de guardar</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ponemos los campos en blanco nuevamentre</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mesa_com</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">),</span>
+        <span class="n">paso_com</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">),</span>
+        <span class="n">entry_menu</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">),</span>
+        <span class="n">entry_cantidad</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span>
+        <span class="c1"># posiciono para tomar nuevo pedido</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        enfocamos el cursor en el Nro de mesa para que el usuario pueda volver a cargar el siguiente pedido de esa u otra mesa.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mesa_com</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span></div>
+
+    <span class="c1"># Borrar pedido</span>
+<div class="viewcode-block" id="MiModelo.borrar"><a class="viewcode-back" href="../modulos.html#modulos.MiModelo.borrar">[docs]</a>    <span class="k">def</span> <span class="nf">borrar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_mesa</span><span class="p">,</span> <span class="n">var_paso</span><span class="p">,</span> <span class="n">var_menu</span><span class="p">,</span> <span class="n">var_cantidad</span><span class="p">,</span> <span class="n">tree</span><span class="p">,</span> <span class="n">mesa_com</span><span class="p">,</span> <span class="n">paso_com</span><span class="p">,</span> <span class="n">entry_menu</span><span class="p">,</span> <span class="n">entry_cantidad</span><span class="p">):</span>  <span class="c1"># OK funciona</span>
+
+        <span class="sd">&quot;&quot;&quot;validamos que no haya campos vacios&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">var_mesa</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">var_paso</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">var_menu</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">var_cantidad</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">selection</span><span class="p">()</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            obtenemos el id del producto seleccionado</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="n">borrar</span> <span class="o">=</span> <span class="n">pedidos</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pedidos</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="nb">id</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            borramos el producto seleccionado de la BD</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="n">respuesta</span> <span class="o">=</span> <span class="n">messagebox</span><span class="o">.</span><span class="n">askyesno</span><span class="p">(</span>
+                <span class="s1">&#39;IMPORTANTE&#39;</span><span class="p">,</span> <span class="s2">&quot;Usted esta a punto de borrar un registro, desea continuar?&quot;</span><span class="p">)</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            advertimos al usuario que esta a punto de borrar un pedido.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="n">respuesta</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">borrar</span><span class="o">.</span><span class="n">delete_instance</span><span class="p">()</span>
+
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                ponemos los campos en blanco nuevamentre</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="c1"># borra el contenido del text luego de guardar</span>
+                <span class="n">mesa_com</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span>
+                <span class="n">paso_com</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span>
+                <span class="n">entry_menu</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span>
+                <span class="n">entry_cantidad</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span>
+                <span class="c1"># actualizo el treeview luego de guardar el elemento</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                ejecutamos la consulta nuevamente, aqui se borrara el treeview y luego se volvera a cargar la informacion restante o existente.</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">consulta</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">mesa_com</span><span class="p">,</span> <span class="n">paso_com</span><span class="p">,</span>
+                              <span class="n">entry_menu</span><span class="p">,</span> <span class="n">entry_cantidad</span><span class="p">)</span>
+                <span class="n">mesa_com</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+
+            <span class="k">elif</span> <span class="n">respuesta</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                    <span class="n">message</span><span class="o">=</span><span class="s2">&quot;La operacion se ha cancelado&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">consulta</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">mesa_com</span><span class="p">,</span> <span class="n">paso_com</span><span class="p">,</span> <span class="n">entry_menu</span><span class="p">,</span> <span class="n">entry_cantidad</span><span class="p">)</span>
+            <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                <span class="n">message</span><span class="o">=</span><span class="s2">&quot;puede que le falte seleccionar algun valor, intente nuevamente&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Cancelacion&quot;</span><span class="p">)</span></div>
+
+    <span class="c1"># Modificar registro seleccionado</span>
+<div class="viewcode-block" id="MiModelo.modificar"><a class="viewcode-back" href="../modulos.html#modulos.MiModelo.modificar">[docs]</a>    <span class="k">def</span> <span class="nf">modificar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_menu</span><span class="p">,</span> <span class="n">var_cantidad</span><span class="p">,</span> <span class="n">var_mesa</span><span class="p">,</span> <span class="n">var_paso</span><span class="p">,</span> <span class="n">tree</span><span class="p">,</span> <span class="n">mesa_com</span><span class="p">,</span> <span class="n">paso_com</span><span class="p">,</span> <span class="n">entry_menu</span><span class="p">,</span> <span class="n">entry_cantidad</span><span class="p">):</span>  <span class="c1"># OK funciona</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        creamos dos variables que se utilizaran para comparar el patron cargado en el valor ingresado.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cad_menu</span> <span class="o">=</span> <span class="n">var_menu</span>
+        <span class="n">cad_cantidad</span> <span class="o">=</span> <span class="n">var_cantidad</span>
+        <span class="c1"># patron de validacion</span>
+        <span class="n">patron</span> <span class="o">=</span> <span class="s2">&quot;^[a-zA-Z0-9\s]+&quot;</span> <span class="s2">&quot;+[a-zA-Z0-9\s]*$&quot;</span>
+        <span class="n">patron_cantidad</span> <span class="o">=</span> <span class="s2">&quot;[0-9]&quot;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        el patron &quot;^[a-zA-Z0-9\s]+&quot; &quot;+[a-zA-Z0-9\s]*$&quot; permitira ingresar valores alfanumericos en mayusculas y minisculas</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Usando try para evaluar una condicion</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">var_paso</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="ow">and</span> <span class="n">var_mesa</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pass&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            validamos que el usuario no este ingresando valores vacios</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Puede que le falte completar algun valor&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;PASO incorrecto&quot;</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                si existio un error, agregamos en nuestro log el error dado en la funcion modificar</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="n">err_modificar</span><span class="p">()</span>
+            <span class="k">except</span> <span class="n">RegistroError</span> <span class="k">as</span> <span class="n">log</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">registrar_err</span><span class="p">()</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">patron</span><span class="p">,</span> <span class="n">cad_menu</span><span class="p">)</span> <span class="ow">and</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">patron_cantidad</span><span class="p">,</span> <span class="n">cad_cantidad</span><span class="p">)):</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                si los patrones se coinciden, con el valor seleccionado ejecutamos la modificacion desde el ID seleccionado</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+                <span class="nb">id</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                <span class="n">actualizar</span> <span class="o">=</span> <span class="n">pedidos</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                    <span class="n">mesa</span><span class="o">=</span><span class="n">var_mesa</span><span class="p">,</span> <span class="n">paso</span><span class="o">=</span><span class="n">var_paso</span><span class="p">,</span> <span class="n">menu</span><span class="o">=</span><span class="n">var_menu</span><span class="p">,</span> <span class="n">cantidad</span><span class="o">=</span><span class="n">var_cantidad</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">pedidos</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="nb">id</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+                <span class="n">actualizar</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                confirmamos al usuario que se modifico el valor.</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                    <span class="n">message</span><span class="o">=</span><span class="s2">&quot;El codigo fue actualizado correctamente&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Actualizacion&quot;</span><span class="p">)</span>
+
+                <span class="c1"># borra el contenido del text luego de guardar</span>
+                
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                una vez modificado el valore, borramos el contenido de los campos y centramos el cursos en la mesa para continuar tomando pedidos.</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                
+                <span class="n">mesa_com</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span>
+                <span class="n">paso_com</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span>
+                <span class="n">entry_menu</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span>
+                <span class="n">entry_cantidad</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">)</span>
+                <span class="c1"># actualizo el treeview luego de guardar el elemento</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">consulta</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">mesa_com</span><span class="p">,</span> <span class="n">paso_com</span><span class="p">,</span>
+                              <span class="n">entry_menu</span><span class="p">,</span> <span class="n">entry_cantidad</span><span class="p">)</span>
+                <span class="n">mesa_com</span><span class="o">.</span><span class="n">focus</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                    <span class="n">message</span><span class="o">=</span><span class="s2">&quot;El menu o la cantidad ingresado son incorrectos, por favor intente nuevamente&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span></div>
+
+        <span class="c1"># imprimir</span>
+    <span class="c1"># Esto iria junto al crear item para que se imprima el ticket en el mostrador</span>
+<div class="viewcode-block" id="MiModelo.imprimir"><a class="viewcode-back" href="../modulos.html#modulos.MiModelo.imprimir">[docs]</a>    <span class="k">def</span> <span class="nf">imprimir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_mesa</span><span class="p">,</span> <span class="n">var_paso</span><span class="p">,</span> <span class="n">var_menu</span><span class="p">,</span> <span class="n">var_cantidad</span><span class="p">,</span> <span class="n">tree</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">var_mesa</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">var_paso</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">var_menu</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">var_cantidad</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Nos aseguramos que ningun campo este vacio.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="n">archivo</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mktemp</span><span class="p">(</span><span class="s2">&quot;.txt&quot;</span><span class="p">)</span>
+            <span class="nb">open</span><span class="p">(</span><span class="n">archivo</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;NUEVO PEDIDO&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;mesa= &quot;</span><span class="o">+</span><span class="n">var_mesa</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;Paso=&quot;</span><span class="o">+</span><span class="n">var_paso</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;Menu= &quot;</span><span class="o">+</span><span class="n">var_menu</span> <span class="o">+</span>
+                                     <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;Cantidad= &quot;</span><span class="o">+</span><span class="n">var_cantidad</span><span class="p">)</span>  <span class="c1"># aqui puedes agregar los valores de tu listbox (o puedes crear un documento .docx)</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            damos formato al tipo de salida que necesitamos en el ticket.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="n">win32api</span><span class="o">.</span><span class="n">ShellExecute</span><span class="p">(</span>
+                <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;printto&quot;</span><span class="p">,</span>
+                <span class="n">archivo</span><span class="p">,</span>
+                <span class="s1">&#39;&quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">win32print</span><span class="o">.</span><span class="n">GetDefaultPrinter</span><span class="p">(),</span>
+                <span class="s2">&quot;.&quot;</span><span class="p">,</span>
+                <span class="mi">0</span>
+            <span class="p">)</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            imprimimos por default en la impresora predeterminada.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Debe seleccionar un dato, intente nuevamente&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jorge.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
