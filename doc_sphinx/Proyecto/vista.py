@@ -35,6 +35,10 @@ class MiVista():
         self.root.geometry("720x330")
         self.root.resizable(0, 0)
 
+        """
+        cremos la tabla que mostrara nuestro contenido
+        """
+
         # Creando la tabla
         self.tree = ttk.Treeview(self.root)
         self.tree.grid(row=0, column=0, pady=10,
@@ -53,6 +57,10 @@ class MiVista():
         self.tree.heading("col4", text="CANTIDAD", anchor=CENTER)
         # evento de seleccion para consulta / Eliminacion
         self.tree.bind("<<TreeviewSelect>>", self.seleccionar)
+
+        """
+        agregamos los campos que completaremos con sus etiquetas de titulos
+        """
 
         # Campos para ingresar
         self.mesa = Label(self.root, text="Mesa")
@@ -82,6 +90,10 @@ class MiVista():
             self.root, textvariable=self.var_cantidad, width=30)
         self.entry_cantidad.grid(row=7, column=3)
 
+
+        """
+        creamos la botonera que ejecutara nuestras acciones
+        """
         # Botonera
         self.boton_g = Button(self.root, text="Guardar",
                               command=lambda: self.obj.funcion_g(
